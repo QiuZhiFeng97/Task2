@@ -18,14 +18,39 @@ function Newton_squart(num){
 	return res;
 }
 
-
-for(num=2;num<=100;num++){
-	var isPrime = true;
+function Mod_function(){
+	for(num=2;num<=100;num++){
+		var isPrime = true;
 	
-	// if a number is prime,it can be devidend by a integer less than squart(num)
-	for(devidend=2;devidend<=Newton_squart(num);devidend++){
-		if(num % devidend === 0) isPrime = false;
+		// if a number is prime,it can be devidend by a integer less than squart(num)
+		for(devidend=2;devidend<=Newton_squart(num);devidend++){
+			if(num % devidend === 0) isPrime = false;
+		}
+		if(isPrime) console.log(num);
 	}
-	if(isPrime) console.log(num);
 }
+
+// 空间复杂度高，时间复杂度底
+function filter_function(){
+	var max = 100;
+	var prime = Array(max).fill(true);
+	prime[0] = prime[1] = false;
+	for(let i = 2; i * i <=max;i++){
+		
+		// 避免重复
+		if(prime[i]){
+			for(let j = i+ i; j<=max;j+=i){
+				prime[j] = false;	
+			}
+		}
+	}
+	
+	// output
+	for(let i = 2;i<100;i++){
+		if(prime[i]) console.log(i);
+	}
+
+}
+
+filter_function();
 
